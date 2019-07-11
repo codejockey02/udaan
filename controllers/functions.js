@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
 const taskModel = require('../models/task');
 const assetModel = require('../models/asset');
@@ -12,9 +11,10 @@ const router = new express.Router();
 
 router.post('/addasset', async (req, res) => {
     const {
-        assetname
+        assetname,
+        id
     } = req.body;
-    addAst.addTask(assetname)
+    addAst.addTask(id, assetname)
         .then(result => res.json({
             message: result.message
         }))
@@ -25,9 +25,11 @@ router.post('/addasset', async (req, res) => {
 
 router.post('/addtask', async (req, res) => {
     const {
-        taskname
+        taskname,
+        id
     } = req.body;
     const newTask = new taskModel({
+        _id: id,
         task_name: taskname,
     }, {
         timestamps: true
@@ -53,7 +55,7 @@ router.post('/addtask', async (req, res) => {
     try {
         await newTask.save();
         return res.json({
-            message: 'Asset Added'
+            message: 'Task Added'
         });
     } catch (err) {
         console.log(err);

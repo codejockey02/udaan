@@ -9,6 +9,7 @@ const app = express();
 
 const UserController = require('./controllers/user');
 const functionalityController = require('./controllers/functions');
+const assignController = require('./controllers/assign');
 
 app.use(bodyParser.json({
     limit: '25mb'
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({
     limit: '25mb'
 }));
 
-app.use('/', UserController, functionalityController);
+app.use('/', UserController, functionalityController, assignController);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URL, {

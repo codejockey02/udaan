@@ -1,7 +1,8 @@
 const db = require('../../models/asset');
 
-exports.addTask = async (assetname) => {
+exports.addTask = async (id, assetname) => {
     const newAsset = new db({
+        _id: id,
         asset_name: assetname,
     }, {
         timestamps: true

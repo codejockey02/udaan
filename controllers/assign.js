@@ -33,3 +33,5 @@ router.post('/allocatetask', async (req, res) => {
     }
 
 });
+
+module.exports = router;
